@@ -12,7 +12,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.counter++;
-    }, 1000);
+    }, 100);
   },
 };
 </script>
