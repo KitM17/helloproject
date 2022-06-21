@@ -13,12 +13,19 @@
       type="text"
       placeholder="Описание"
     />
-    <button class="btn" @click="createPost">Создать</button>
+    <my-button
+      class="btn"
+      style="align-self: flex-end; margin-top: 15px"
+      @click="createPost"
+      >Создать</my-button
+    >
   </form>
 </template>
 
 <script>
+
 export default {
+
   data() {
     return {
       post: {
@@ -50,13 +57,5 @@ form {
   border: 1px solid teal;
   padding: 10px 15px;
   margin-top: 1rem;
-}
-.btn {
-  margin-top: 1rem;
-  align-self: flex-end;
-  padding: 10px 15px;
-  background: none;
-  color: teal;
-  border: 1px solid teal;
 }
 </style>
