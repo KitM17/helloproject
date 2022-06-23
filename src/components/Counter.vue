@@ -1,5 +1,5 @@
 <template>
-{{ counter }}
+  {{ counter }}
 </template>
 
 <script>
