@@ -1,9 +1,9 @@
 <template>
-  <div class="app">
+  <div class="app" >
     <post-form @create="createPost" />
-    <post-list :posts="posts" 
-    @remove="removePost"/>
+    <post-list :posts="posts" @remove="removePost" />
   </div>
+  
 </template>
 
 <script>
@@ -29,9 +29,9 @@ export default {
     createPost(post) {
       this.posts.push(post);
     },
-    removePost (post) {
-      this.posts=this.posts.filter(p=>p.id !==post.id)
-    }
+    removePost(post) {
+      this.posts = this.posts.filter((p) => p.id !== post.id);
+    },
   },
 };
 </script>
