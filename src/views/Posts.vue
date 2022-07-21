@@ -1,10 +1,11 @@
 <template>
   <div class="app">
     <h1>Страница с постами</h1>
+    <div class="app__btns">
+      <my-button @click="showDialog"> Создать пост</my-button>
+      <my-select v-model="selectedSort" :options="sortOptions" />
+    </div>
 
-    <my-button @click="showDialog" style="margin: 15px">
-      Создать пост</my-button
-    >
     <my-dialog v-model:show="dialogVisible">
       <post-form @create="createPost"
     /></my-dialog>
@@ -19,17 +20,24 @@ import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
 import MyButton from "../components/ui/MyButton.vue";
 import axios from "axios";
+import MySelect from "../components/ui/MySelect.vue";
 export default {
   components: {
     PostList,
     PostForm,
     MyButton,
+    MySelect,
   },
   data() {
     return {
       posts: [],
       dialogVisible: false,
       isPostsLoading: false,
+      selectedSort: "",
+      sortOptions: [
+        { value: "title", name: "По названию" },
+        { value: "body", name: "По описанию" },
+      ],
     };
   },
   methods: {
@@ -51,17 +59,23 @@ export default {
             "https://jsonplaceholder.typicode.com/posts?_limit=10"
           );
           this.posts = responce.data;
-            this.isPostsLoading=false;
+          this.isPostsLoading = false;
         }, 1000);
       } catch (e) {
         alert("Ошибка");
       } finally {
-      
       }
     },
   },
   mounted() {
     this.fetchPosts();
+  },
+  watch: {
+    selectedSort(newValue) {
+      this.posts.sort((post1, post2) => {
+        return post1[newValue]?.localeCompare(post2[newValue]);
+      });
+    },
   },
 };
 </script>
@@ -69,5 +83,10 @@ export default {
 <style>
 .app {
   pad: 2.5rem;
+}
+.app__btns {
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
